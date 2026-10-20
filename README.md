@@ -1,10 +1,10 @@
 # ufw_prune.py
 
-Safely bulk-delete ufw rules using **original rule numbers** from a single snapshot — no re-checking indexes between deletions.
+Safely bulk-delete ufw rules using **original rule numbers** from a single snapshot; no re-checking indexes between deletions.
 
 ## Why
 
-`ufw delete <n>` renumbers the list after every deletion. Deleting rule 5 then rule 8 means rule 8 is now 7 — and you nuke the wrong rule. This script snapshots `ufw status numbered` once, then deletes your selection in a safe, remapped order.
+`ufw delete <n>` renumbers the list after every deletion. Deleting rule 5 then rule 8 means rule 8 is now 7 ; and you nuke the wrong rule. This script snapshots `ufw status numbered` once, then deletes your selection in a safe, remapped order.
 
 ## Install
 
@@ -34,11 +34,11 @@ sudo python3 ufw_prune.py --all
 
 ## How it stays safe
 
-1. **Snapshot once** — original numbers never shift from your perspective.
-2. **Deletes descending** — lower indexes can't be invalidated mid-run.
-3. **Spec-based deletion first** — tries `ufw delete allow from X to any port Y`, which is order-independent.
-4. **Text-matching fallback** — if spec parsing fails, re-queries current state and matches the snapshot's exact rule text.
-5. **Fails safe** — a rule it can't confidently delete is reported as `FAILED` for manual removal, never guessed at.
+1. **Snapshot once** ; original numbers never shift from your perspective.
+2. **Deletes descending** ; lower indexes can't be invalidated mid-run.
+3. **Spec-based deletion first** ; tries `ufw delete allow from X to any port Y`, which is order-independent.
+4. **Text-matching fallback** ; if spec parsing fails, re-queries current state and matches the snapshot's exact rule text.
+5. **Fails safe** ; a rule it can't confidently delete is reported as `FAILED` for manual removal, never guessed at.
 
 ## Recommended workflow
 
